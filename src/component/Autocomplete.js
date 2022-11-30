@@ -77,9 +77,8 @@ const Autocomplete = (props) => {
             const text_search = input.split(".");
             console.log(text_search)
             const country = text_search[text_search.length - 1].split(' ');
-            const aaa = country[country.length - 1].trim();
-            console.log(aaa)
-            const productList = props.products[aaa];
+            const countrry_text_esrach = country[country.length - 1].trim();
+            const productList = props.products[countrry_text_esrach];
             setProductData(productList);
             setKeyState(true)
             setSpaceKey(false)
