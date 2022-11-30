@@ -25,7 +25,7 @@ const Autocomplete = (props) => {
         const text = input?.split('.');
         if (text?.length && keyState && productData) {
             const search = text[text.length - 1];
-            const filterd = productData.filter(res => res.toLowerCase().includes(search));
+            const filterd = productData.filter(res => res.toLowerCase().includes(search.toLowerCase()));
             setFiltered(filterd)
         }
     }, [input, productData, keyState])
@@ -52,15 +52,22 @@ const Autocomplete = (props) => {
         let text_search
         if (keyState) {
             text_search = input.split(".")
-            text_search[text_search.length - 1] = "." + e;
+            text_search[text_search.length - 1] =  e;
+            setInput(text_search.join('.'))
         } else {
             text_search = input.split(" ")
-            text_search[text_search.length - 1] = " " + e;
+            text_search[text_search.length - 1] = e;
+            setInput(text_search.join(' '))
         }
-        setInput(text_search.join(''))
     };
 
     const onKeyDown = (e) => {
+        console.log(e.keyCode);
+        if(e.keyCode ===18) {
+            setKeyState(false);
+            setSpaceKey(false);
+            setFiltered([])
+        }
         if (e.keyCode == 32) {
             setKeyState(false);
             setSpaceKey(true)
@@ -69,8 +76,10 @@ const Autocomplete = (props) => {
         if (e.keyCode === 190) {
             const text_search = input.split(".");
             console.log(text_search)
-            const country = text_search[text_search.length - 1].trim();
-            const productList = props.products[country];
+            const country = text_search[text_search.length - 1].split(' ');
+            const aaa = country[country.length - 1].trim();
+            console.log(aaa)
+            const productList = props.products[aaa];
             setProductData(productList);
             setKeyState(true)
             setSpaceKey(false)
