@@ -1,0 +1,14 @@
+.App {
+  text-align: center;
+  padding: 12px;
+}
+.App input{
+  margin-left: 12px;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 20px;
+}
+.autocomplete{
+  list-style: none;
+}
+
